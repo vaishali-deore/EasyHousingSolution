@@ -1,0 +1,24 @@
+<div class="auth-container">
+    <h2>Sign Up</h2>
+    
+    <form (ngSubmit)="signup()">  <!-- ✅ Use (ngSubmit) instead of (submit) -->
+
+    <!-- <form (submit)="signup()"> -->
+      <label>Username</label>
+      <input type="text" [(ngModel)]="username" placeholder="Enter your username" required>
+
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" placeholder="Enter your password" required>
+
+      <label>User Type</label>
+      <select [(ngModel)]="userType">
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <button type="submit" class="secondary-btn">Register</button>
+    </form>
+
+    <p class="redirect-text">Already have an account? <a routerLink="/login">Login here</a></p>
+</div>

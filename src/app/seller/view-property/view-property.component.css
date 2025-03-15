@@ -1,0 +1,87 @@
+.add-property-btn {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-property-btn:hover {
+    background-color: #218838;
+  }
+  
+.view-property-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  td {
+    color: #333;
+  }
+  
+  .verified {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .not-verified {
+    color: red;
+    font-weight: bold;
+  }
+  
+  button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 2px;
+  }
+  
+  .edit-btn {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .edit-btn:hover {
+    background-color: #e0a800;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  

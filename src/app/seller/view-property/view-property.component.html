@@ -1,0 +1,40 @@
+<div class="view-property-container">
+    <h2>View Properties</h2>
+    <button class="add-property-btn" (click)="navigateToAddProperty()">➕ Add Property</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Property Name</th>
+                <th>Address</th>
+                <th>Region</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Option</th>
+                <th>Verified</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let property of properties">
+                <td>{{ property.id }}</td>
+                <td>{{ property.name }}</td>
+                <td>{{ property.address }}</td>
+                <td>{{ property.region }}</td>
+                <td>{{ property.type }}</td>
+                <td>{{ property.price }}</td>
+                <td>{{ property.option }}</td>
+                <td>
+                    <span [ngClass]="{'verified': property.verified, 'not-verified': !property.verified}">
+                        {{ property.verified ? '✔ Verified' : '❌ Not Verified' }}
+                    </span>
+                </td>
+                <td>
+                    <button class="edit-btn" (click)="editProperty(property.id)">Edit</button>
+                    <button class="delete-btn" (click)="deleteProperty(property.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
