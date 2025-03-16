@@ -1,3 +1,6 @@
+
+<app-header></app-header>
+
 <div class="auth-container">
     <h2>Login</h2>
     <form (submit)="login()">
@@ -10,5 +13,8 @@
       <button type="submit" class="primary-btn">Login</button>
     </form>
 
-    <p class="redirect-text">New user? <a routerLink="/signup">Create an account</a></p>
+    <p class="redirect-text">New user? <a (click)="singUp()" routerLink="/signup">Create an account</a></p>
 </div>
+<app-footer></app-footer>
+
+

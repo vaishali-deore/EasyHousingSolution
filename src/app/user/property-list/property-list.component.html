@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="cart-container">
+    <button class="view-cart-btn" (click)="viewCart()">View Cart</button>
+  </div>
+  
+<div class="property-container">
+    <div *ngFor="let property of properties" class="property-card">
+      <img [src]="property.image" alt="Property Image">
+      <div class="property-details">
+        <h3>${{ property.price }}</h3>
+        <p>{{ property.address }}</p>
+        <button (click)="addToCart(property)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

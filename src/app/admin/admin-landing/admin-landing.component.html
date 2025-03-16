@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+<div class="admin-container">
+  <h2>Welcome to Admin Dashboard</h2>
+  <!-- <p>Manage users, properties, and more.</p> -->
+
+  <div class="button-group">
+    <button (click)="navigateToPropertyOwner()">View Property by Owner</button>
+    <button (click)="navigateToPropertyRegion()">View Property by Region</button>
+  </div>
+
+  <!-- <router-outlet></router-outlet> -->
+
+
+  <app-admin-view-property></app-admin-view-property>
+</div>
+
+<app-footer></app-footer>

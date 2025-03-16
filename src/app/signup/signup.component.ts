@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 // import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,  // ✅ This makes it a standalone component
-  imports: [FormsModule],  // ✅ Import FormsModule here
+  imports: [FormsModule,HeaderComponent,FooterComponent],  // ✅ Import FormsModule here
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
@@ -15,6 +18,11 @@ export class SignupComponent {
   userType: string = 'buyer';
 
   // constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
+
+  goToSingIn() {
+    this.router.navigate(['/login']);
+  }
 
   signup() {
     console.log("Username:", this.username);

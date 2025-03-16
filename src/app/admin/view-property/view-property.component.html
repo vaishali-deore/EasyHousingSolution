@@ -1,0 +1,27 @@
+<div class="table-container">
+    <h2>Property Verification</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Property ID</th>
+          <th>Property Name</th>
+          <th>Seller Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties">
+          <td><span (click)="goToApproveProperty()"   class="highlight">{{ property.id }}</span></td>
+          <td>{{ property.name }}</td>
+          <td>{{ property.seller }}</td>
+          <td>
+            <button class="approve-btn" (click)="approveProperty(property.id)" [disabled]="property.approved">
+                {{ property.approved ? 'Approved' : 'Approve' }}
+              </button>
+            <button class="delete-btn" (click)="approveProperty(property.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,9 @@
+<app-header></app-header> <div class="property-card">
+    <img [src]="property.image" alt="Property Image">
+    <div class="property-details">
+      <h3>${{ property.price }}</h3>
+      <p>{{ property.address }}</p>
+      <button class="delete-btn" (click)="deleteProperty(property.id)">Delete</button>
+    </div>
+</div>
+<app-footer></app-footer>

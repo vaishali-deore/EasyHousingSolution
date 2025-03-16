@@ -25,11 +25,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-seller-landing',
   standalone: true,
-  imports: [CommonModule],  // ✅ Import FormsModule here
+  imports: [CommonModule,HeaderComponent,FooterComponent],  // ✅ Import FormsModule here
   templateUrl: './seller-landing.component.html',
   styleUrls: ['./seller-landing.component.css']
 })
