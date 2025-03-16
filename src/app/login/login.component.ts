@@ -17,6 +17,7 @@ export class LoginComponent {
   password: string = '';
   userType: string = '';  // ✅ Add this property
 
+  // currently we not api integrated
   // constructor(private authService: AuthService, private router: Router) {}
   constructor( private router: Router) {}
 
