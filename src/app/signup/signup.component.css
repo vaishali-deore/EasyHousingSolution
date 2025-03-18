@@ -1,48 +1,71 @@
+/* General container styling */
 .auth-container {
     max-width: 400px;
-    margin: auto;
-    padding: 20px;
+    margin: 10px auto;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background: #fff;
     text-align: center;
 }
 
+/* Heading */
 .auth-container h2 {
     margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
+/* Labels */
 .auth-container label {
     display: block;
     text-align: left;
     margin: 10px 0 5px;
+    font-weight: 600;
+    color: #555;
 }
 
+/* Input fields and dropdowns */
 .auth-container input, 
 .auth-container select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
 }
 
+/* Input focus effect */
+.auth-container input:focus,
+.auth-container select:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Button */
 .secondary-btn {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease-in-out;
 }
 
 .secondary-btn:hover {
     background: #0056b3;
 }
 
+/* Login redirection text */
 .redirect-text {
     margin-top: 15px;
+    font-size: 14px;
 }
 
 .redirect-text a {
@@ -52,4 +75,40 @@
 
 .redirect-text a:hover {
     text-decoration: underline;
+}
+
+/* ✅ RESPONSIVE DESIGN */
+
+/* Small screens (Phones) */
+@media (max-width: 480px) {
+    .auth-container {
+        width: 90%;
+        padding: 15px;
+    }
+    .auth-container h2 {
+        font-size: 20px;
+    }
+    .auth-container input,
+    .auth-container select {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .secondary-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+/* Medium screens (Tablets) */
+@media (max-width: 768px) {
+    .auth-container {
+        width: 70%;
+    }
+}
+
+/* Large screens (Desktops) */
+@media (min-width: 1024px) {
+    .auth-container {
+        max-width: 450px;
+    }
 }

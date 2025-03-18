@@ -1,26 +1,8 @@
-// import { CommonModule } from '@angular/common';
-// import { Component } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-
-// @Component({
-//   selector: 'app-view-property',
-//   standalone: true,
-//   imports: [CommonModule],  // ✅ Import FormsModule here
-//   templateUrl: './view-property.component.html',
-//   styleUrls: ['./view-property.component.css']
-// })
-// export class ViewPropertyComponent {
-//   properties = [
-//     { name: 'Luxury Villa', location: 'Mumbai' },
-//     { name: 'Beach House', location: 'Goa' },
-//     { name: 'Sky Apartment', location: 'Pune' }
-//   ];
-// }
-
-
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Property } from './view-property.model';
+import { SellerService } from '../../services/seller.service';
 
 @Component({
   selector: 'app-view-property',
@@ -29,28 +11,52 @@ import { Router } from '@angular/router';
   templateUrl: './view-property.component.html',
   styleUrls: ['./view-property.component.css']
 })
-export class ViewPropertyComponent {
-  properties = [
-    { id: 1, name: 'Luxury Apartment', address: '123 Main St', region: 'Downtown', type: 'Apartment', price: '$200,000', option: 'Sell', verified: true },
-    { id: 2, name: 'Cozy Villa', address: '456 Palm Rd', region: 'Suburb', type: 'Villa', price: '$500,000', option: 'Rent', verified: false },
-    { id: 3, name: 'Modern House', address: '789 Oak Ave', region: 'Uptown', type: 'House', price: '$300,000', option: 'Sell', verified: true }
-  ];
+export class ViewPropertyComponent implements OnInit {
+  properties: Property[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private sellerService: SellerService, private router: Router) {}
 
+  ngOnInit() {
+    this.loadProperties();
+  }
+
+  // 🔹 Fetch Properties from API
+  loadProperties() {
+    this.sellerService.getAllProperties().subscribe(
+      (response) => {
+        console.log('res::get all proeprty ',response)
+        this.properties = response;
+      },
+      (error) => {
+        console.error('Error fetching properties:', error);
+        alert('Failed to fetch properties.');
+      }
+    );
+  }
+
+  // 🔹 Navigate to Edit Property Page
   editProperty(id: number) {
-    alert(`Edit property with ID: ${id}`);
     this.router.navigate([`/seller/edit-property/${id}`]);
   }
 
+  // 🔹 Navigate to Add Property Page
   navigateToAddProperty() {
-    this.router.navigate(['/seller/add-property']);  // ✅ Navigates to Add Property page
+    this.router.navigate(['/seller/add-property']);
   }
 
+  // 🔹 Delete Property
   deleteProperty(id: number) {
     if (confirm('Are you sure you want to delete this property?')) {
-      this.properties = this.properties.filter(property => property.id !== id);
-      alert('Property deleted successfully.');
+      this.sellerService.deleteProperty(id).subscribe(
+        () => {
+          this.properties = this.properties.filter(property => property.propertyId !== id);
+          alert('Property deleted successfully.');
+        },
+        (error) => {
+          console.error('Error deleting property:', error);
+          alert('Failed to delete property.');
+        }
+      );
     }
   }
 }

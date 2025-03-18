@@ -14,9 +14,10 @@ import { ViewPropertyOwnerComponent } from './app/admin/view-property-owner/view
 import { UserLandingComponent } from './app/user/landing/landing.component';
 import { PropertyListComponent } from './app/user/property-list/property-list.component';
 import { PropertyCardComponent } from './app/components/property-card/property-card.component';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
-  providers: [
+  providers: [ [provideHttpClient()],
     provideRouter([
       { path: '', component: LandingComponent },
       { path: 'login', component: LoginComponent },

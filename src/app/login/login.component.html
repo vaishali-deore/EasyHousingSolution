@@ -5,10 +5,10 @@
     <h2>Login</h2>
     <form (submit)="login()">
       <label>Email</label>
-      <input type="email" [(ngModel)]="email" placeholder="Enter your email" required>
+      <input type="email" [(ngModel)]="userName" name="userName" placeholder="Enter your user name" required>
       
       <label>Password</label>
-      <input type="password" [(ngModel)]="password" placeholder="Enter your password" required>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required>
       
       <button type="submit" class="primary-btn">Login</button>
     </form>

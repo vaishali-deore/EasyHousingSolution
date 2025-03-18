@@ -7,32 +7,30 @@
             <tr>
                 <th>ID</th>
                 <th>Property Name</th>
+                <th>Property Type</th>
+                <th>Property Option</th>
+                <th>Description</th>
                 <th>Address</th>
-                <th>Region</th>
-                <th>Type</th>
                 <th>Price</th>
-                <th>Option</th>
-                <th>Verified</th>
+                <th>Initial Deposit</th>
+                <th>Landmark</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let property of properties">
-                <td>{{ property.id }}</td>
-                <td>{{ property.name }}</td>
+                <td>{{ property.propertyId }}</td>
+                <td>{{ property.propertyName }}</td>
+                <td>{{ property.propertyType }}</td>
+                <td>{{ property.propertyOption }}</td>
+                <td>{{ property.description }}</td>
                 <td>{{ property.address }}</td>
-                <td>{{ property.region }}</td>
-                <td>{{ property.type }}</td>
-                <td>{{ property.price }}</td>
-                <td>{{ property.option }}</td>
+                <td>{{ property.priceRange }}</td>
+                <td>{{ property.initialDeposit || 'N/A' }}</td>
+                <td>{{ property.landmark }}</td>
                 <td>
-                    <span [ngClass]="{'verified': property.verified, 'not-verified': !property.verified}">
-                        {{ property.verified ? '✔ Verified' : '❌ Not Verified' }}
-                    </span>
-                </td>
-                <td>
-                    <button class="edit-btn" (click)="editProperty(property.id)">Edit</button>
-                    <button class="delete-btn" (click)="deleteProperty(property.id)">Delete</button>
+                    <button class="edit-btn" (click)="editProperty(property.propertyId)">Edit</button>
+                    <button class="delete-btn" (click)="deleteProperty(property.propertyId)">Delete</button>
                 </td>
             </tr>
         </tbody>
