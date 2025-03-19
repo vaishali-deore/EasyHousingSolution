@@ -71,8 +71,8 @@ export class SignupComponent {
       phoneNo: this.phoneNo,
       address: this.address,
       emailId: this.emailId,
-      stateId: this.stateId,
-      cityId: this.cityId
+      stateId: 2,
+      cityId: 2
     };
 
     console.log('Signup Payload:', signupPayload);

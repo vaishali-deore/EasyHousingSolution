@@ -44,4 +44,16 @@ export class SellerService {
 
     return this.http.delete(`${this.baseUrl}/DeleteProperty/${propertyId}`, { headers });
   }
+
+
+  getPropertyById(propertyId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/GetPropertyById/${propertyId}`);
+  }
+
+  updateProperty(propertyId: number, propertyData: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(`${this.baseUrl}/UpdateProperty/${propertyId}`, JSON.stringify(propertyData), { headers });
+  }
+
+
 }

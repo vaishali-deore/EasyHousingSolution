@@ -15,6 +15,7 @@ import { UserLandingComponent } from './app/user/landing/landing.component';
 import { PropertyListComponent } from './app/user/property-list/property-list.component';
 import { PropertyCardComponent } from './app/components/property-card/property-card.component';
 import { provideHttpClient } from '@angular/common/http';
+import { UpdatePropertyComponent } from './app/seller/update-property/update-property.component';
 
 bootstrapApplication(AppComponent, {
   providers: [ [provideHttpClient()],
@@ -32,6 +33,8 @@ bootstrapApplication(AppComponent, {
         { path: 'userlanding', component: UserLandingComponent },
           { path: 'propertylist', component: PropertyListComponent },
           { path: 'components/card', component: PropertyCardComponent },
+            { path: 'update-property/:id', component: UpdatePropertyComponent },
+          
         
       
     ])

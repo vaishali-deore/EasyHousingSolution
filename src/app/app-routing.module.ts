@@ -14,6 +14,7 @@ import { ViewPropertyRegionComponent } from './admin/view-property-region/view-p
 import { UserLandingComponent } from './user/landing/landing.component';
 import { PropertyListComponent } from './user/property-list/property-list.component';
 import { PropertyCardComponent } from './components/property-card/property-card.component';
+import { UpdatePropertyComponent } from './seller/update-property/update-property.component';
 // import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
 // import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
 
@@ -40,6 +41,8 @@ export const routes: Routes = [
   { path: 'userlanding', component: UserLandingComponent },
   { path: 'propertylist', component: PropertyListComponent },
   { path: 'components/card', component: PropertyCardComponent },
+  { path: 'update-property/:id', component: UpdatePropertyComponent },
+  
   
 
 

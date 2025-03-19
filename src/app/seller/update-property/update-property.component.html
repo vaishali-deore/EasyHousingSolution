@@ -1,0 +1,40 @@
+<div class="update-property-container">
+    <h2>Update Property</h2>
+  
+    <form (ngSubmit)="updateProperty()">
+      <label>Property Name:</label>
+      <input type="text" [(ngModel)]="propertyData.propertyName" name="propertyName" required />
+  
+      <label>Property Type:</label>
+      <input type="text" [(ngModel)]="propertyData.propertyType" name="propertyType" required />
+  
+      <label>Property Option:</label>
+      <select [(ngModel)]="propertyData.propertyOption" name="propertyOption">
+        <option value="sell">Sell</option>
+        <option value="rent">Rent</option>
+      </select>
+  
+      <label>Description:</label>
+      <textarea [(ngModel)]="propertyData.description" name="description"></textarea>
+  
+      <label>Address:</label>
+      <input type="text" [(ngModel)]="propertyData.address" name="address" required />
+  
+      <label>Price Range:</label>
+      <input type="number" [(ngModel)]="propertyData.priceRange" name="priceRange" required />
+  
+      <label>Initial Deposit:</label>
+      <input type="number" [(ngModel)]="propertyData.initialDeposit" name="initialDeposit" [disabled]="propertyData.propertyOption !== 'rent'" />
+  
+      <label>Landmark:</label>
+      <input type="text" [(ngModel)]="propertyData.landmark" name="landmark" />
+<!--   
+      <label>Active:</label>
+      <input type="checkbox" [(ngModel)]="propertyData.isActive" name="isActive" /> -->
+  
+      <button type="submit">Update Property</button>
+      <!-- <button type="button" (click)="router.navigate(['/seller/view-property'])">Cancel</button> -->
+      <button type="button" >Cancel</button>
+    </form>
+  </div>
+  

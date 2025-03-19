@@ -36,7 +36,7 @@ export class ViewPropertyComponent implements OnInit {
 
   // 🔹 Navigate to Edit Property Page
   editProperty(id: number) {
-    this.router.navigate([`/seller/edit-property/${id}`]);
+    this.router.navigate([`/update-property/${id}`]);
   }
 
   // 🔹 Navigate to Add Property Page

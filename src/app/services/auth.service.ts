@@ -25,6 +25,6 @@ export class AuthService {
     login(userName: string, password: string): Observable<any> {
         console.log(`${this.loginUrl}?Username=${userName}&Password=${password}`)
         console.log('userName',userName," ","password",password)
-        return this.http.get(`${this.loginUrl}?Username=${userName}&Password=${password}`);
+        return this.http.post(`${this.loginUrl}?Username=${userName}&Password=${password}`,[]);
       }
   }
