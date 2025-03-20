@@ -1,66 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Property } from './property.model';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { FooterComponent } from "../../components/footer/footer.component";
 import { Router } from '@angular/router';
 import { PropertyCardComponent } from '../../components/property-card/property-card.component';
+import { BuyerService } from '../../services/buyer.service';
+import { FormsModule } from '@angular/forms';
 // import { Property } from '../../models/property.model';
 
 @Component({
   selector: 'app-property-list',
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent,FormsModule],
+
   standalone:true,
   templateUrl: './property-list.component.html',
   styleUrls: ['./property-list.component.css']
 })
-export class PropertyListComponent {
+export class PropertyListComponent implements OnInit {
+  properties: any[] = [];
+  searchParams = {
+    region: '',
+    type: '',
+    priceOrder: ''
+  };
 
-  constructor(private router: Router) {}
 
-  properties: Property[] = [
-    {
-      id: 1,
-      image: 'assets/property1.jpg',
-      price: 50000,
-      address: '123 Main Street, New York, NY'
-    },
-    {
-      id: 2,
-      image: 'assets/property2.jpg',
-      price: 75000,
-      address: '456 Elm Street, Los Angeles, CA'
-    },
-    {
-      id: 3,
-      image: 'assets/property3.jpg',
-      price: 62000,
-      address: '789 Maple Avenue, Chicago, IL'
-    },
-    {
-      id: 4,
-      image: 'assets/property4.jpg',
-      price: 85000,
-      address: '101 Oak Street, Miami, FL'
-    },
-    {
-      id: 5,
-      image: 'assets/property5.jpg',
-      price: 95000,
-      address: '222 Pine Avenue, San Francisco, CA'
-    },
-    {
-      id: 6,
-      image: 'assets/property6.jpg',
-      price: 72000,
-      address: '333 Cedar Road, Houston, TX'
-    }
-];
+  constructor(private propertyService: BuyerService,
+    private router: Router
+  ) {}
 
-  addToCart(property: Property) {
-    console.log('Added to cart:', property);
-    alert(`Property at ${property.address} added to cart!`);
+
+  
+  ngOnInit() {
+    this.loadProperties();
   }
+
+  // 🔹 Fetch Properties from API
+  loadProperties() {
+    this.propertyService.getAllProperties().subscribe(
+      (response) => {
+        console.log('res::get all proeprty ',response)
+        this.properties = response;
+      },
+      (error) => {
+        console.error('Error fetching properties:', error);
+        alert('Failed to fetch properties.');
+      }
+    );
+  }
+
+  // 🔍 Search Properties
+  searchProperties() {
+    console.log('searchParams:', this.searchParams);
+    this.propertyService.searchProperties(this.searchParams.region,this.searchParams.type,this.searchParams.priceOrder).subscribe(
+      (data:any) => {
+        console.log("data search property",data);
+        this.properties = data;
+      },
+      (error) => {
+        console.error('Error searching properties:', error);
+      }
+    );
+  }
+
+  // 🛒 Add to Cart
+  addToCart(property: any) {
+    this.propertyService.addToCart(property);
+    alert('Property added to cart!');
+  }
+
+  // 🛍 View Cart
 
   viewCart() {
     alert("Redirecting to cart...");
