@@ -8,6 +8,8 @@ import { Property } from '../seller/view-property/view-property.model';
 })
 export class SellerService {
   private baseUrl = 'http://localhost:5052/api/Seller';
+  private apiUrl = 'http://localhost:5052/api/Seller/UploadImage';
+
 
   constructor(private http: HttpClient) {}
 
@@ -55,5 +57,14 @@ export class SellerService {
     return this.http.put(`${this.baseUrl}/UpdateProperty/${propertyId}`, JSON.stringify(propertyData), { headers });
   }
 
+  uploadImages(propertyId: number, images: File[]): Observable<any> {
+    const formData = new FormData();
+    
+    images.forEach((image) => {
+      formData.append('files', image);
+    });
+
+    return this.http.post(`${this.apiUrl}?propertyId=${propertyId}`, formData);
+  }
 
 }

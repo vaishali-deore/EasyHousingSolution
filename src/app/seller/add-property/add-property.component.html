@@ -38,15 +38,23 @@
       <input type="text" [(ngModel)]="landmark" name="landmark" placeholder="Enter landmark" required>
 
       <!-- <label>Region</label>
-      <input type="text" [(ngModel)]="region" name="region" placeholder="Enter region" required>
+      <input type="text" [(ngModel)]="region" name="region" placeholder="Enter region" required> -->
 
 
 
       <label>Upload Images</label>
-      <input type="file" (change)="onFileSelect($event)" multiple accept="image/*"> -->
+      <input type="file" (change)="onFileSelect($event)" multiple accept="image/*"> 
+
+<!-- Display Selected Images -->
+<div class="image-preview-container">
+    <div *ngFor="let image of imagePreviews">
+        <img [src]="image" class="image-preview" alt="Selected Image">
+    </div>
+</div>
 
 
-
+<!-- Error Message if Exceeding 6 Images -->
+<p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
       <button type="submit">Submit</button>
   </form>
