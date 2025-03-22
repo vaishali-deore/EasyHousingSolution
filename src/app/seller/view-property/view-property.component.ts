@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Property } from './view-property.model';
 import { SellerService } from '../../services/seller.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-view-property',
@@ -25,31 +25,72 @@ export class ViewPropertyComponent implements OnInit {
   }
 
   // 🔹 Fetch Properties from API
+  // loadProperties() {
+  // this.loading = true;
+  //   this.sellerService.getAllProperties().subscribe(
+  //     (response) => {
+  //       console.log('res::get all proeprty ',response)
+  //       this.properties = response;
+  //       // Fetch image URLs for each property
+  //       this.properties.forEach((property) => {
+  //         this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
+  //           property.imageUrl = imageUrl; // Store image URL in the property object
+  //         });
+  //         this.loading = false;
+  //         });
+  //         console.log('************',this.properties);
+
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching properties:', error);
+  //       alert('Failed to fetch properties.');
+  //       this.loading = false;
+
+  //     }
+  //   );
+  // }
+
+
+  //New Property and image api
+
   loadProperties() {
-  this.loading = true;
+    this.loading = true;
+    
     this.sellerService.getAllProperties().subscribe(
-      (response) => {
-        console.log('res::get all proeprty ',response)
-        this.properties = response;
-        // Fetch image URLs for each property
-        this.properties.forEach((property) => {
-          this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
-            property.imageUrl = imageUrl; // Store image URL in the property object
-          });
-          this.loading = false;
-          });
-          console.log('************',this.properties);
+        (response) => {
+            console.log('res::get all property ', response);
+            this.properties = response;
 
-      },
-      (error) => {
-        console.error('Error fetching properties:', error);
-        alert('Failed to fetch properties.');
-        this.loading = false;
+            // Create an array of observables to fetch all images
+            const imageRequests = this.properties.map(property =>
+                this.getImageByPropertyId(property.propertyId).pipe(
+                    map(imageUrl => ({ ...property, imageUrl })) // Attach image URL to property
+                )
+            );
 
-      }
+            // Wait for all image requests to complete
+            forkJoin(imageRequests).subscribe(
+                updatedProperties => {
+                    this.properties = updatedProperties; // Assign properties with images
+                    this.loading = false;
+                    console.log('************ Updated Properties:', this.properties);
+                },
+                error => {
+                    console.error('Error fetching property images:', error);
+                    this.loading = false;
+                }
+            );
+        },
+        (error) => {
+            console.error('Error fetching properties:', error);
+            alert('Failed to fetch properties.');
+            this.loading = false;
+        }
     );
-  }
+}
 
+
+  
   // 🔹 Navigate to Edit Property Page
   editProperty(id: number) {
     this.router.navigate([`/update-property/${id}`]);

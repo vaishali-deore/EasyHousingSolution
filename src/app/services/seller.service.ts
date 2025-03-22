@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Property } from '../seller/view-property/view-property.model';
 
 @Injectable({
@@ -67,8 +67,21 @@ export class SellerService {
     return this.http.post(`${this.apiUrl}?propertyId=${propertyId}`, formData);
   }
 
-  getImageByPropertyId(propertyId: number) {
-    return this.http.get<string>(`${this.baseUrl}/ViewImage/${propertyId}`);
-  }
+  // getImageByPropertyId(propertyId: number) {
+  //   return this.http.get(`${this.baseUrl}/ViewImage/${propertyId}`);
+
+  //   // return this.http.get<string>(`${this.baseUrl}/ViewImage/${propertyId}`);
+  // }
+
+  getImageByPropertyId(propertyId: number): Observable<string> {
+    return this.http.get<{ image1: string }>(`${this.baseUrl}/ViewImage/${propertyId}`).pipe(
+        map(response => `data:image/jpeg;base64,${response.image1}`),  // Convert Base64 to image URL
+        catchError((error) => {
+            console.error(`Error fetching image for property ${propertyId}:`, error);
+            return of('/assets/images/default-property.jpg'); // Default image on error
+        })
+    );
+}
+
 
 }
