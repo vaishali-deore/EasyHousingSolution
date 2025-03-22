@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Property } from './view-property.model';
 import { SellerService } from '../../services/seller.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
+import { catchError, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-view-property',
@@ -30,7 +31,14 @@ export class ViewPropertyComponent implements OnInit {
       (response) => {
         console.log('res::get all proeprty ',response)
         this.properties = response;
-        this.loading = false;
+        // Fetch image URLs for each property
+        this.properties.forEach((property) => {
+          this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
+            property.imageUrl = imageUrl; // Store image URL in the property object
+          });
+          this.loading = false;
+          });
+          console.log('************',this.properties);
 
       },
       (error) => {
@@ -69,20 +77,29 @@ export class ViewPropertyComponent implements OnInit {
   }
   
 
-  getImageByPropertyId(propertyId: number): string {
-    let imageUrl = '';
+  // getImageByPropertyId(propertyId: number): string {
+  //   let imageUrl = '';
   
-    this.sellerService.getImageByPropertyId(propertyId).subscribe(
-      (response) => {
-        console.log(`Image URL for property ${propertyId}:`, response);
-        imageUrl = response; // Assign the image URL
-      },
-      (error) => {
-        console.error(`Error fetching image for property ${propertyId}:`, error);
-      }
+  //   this.sellerService.getImageByPropertyId(propertyId).subscribe(
+  //     (response) => {
+  //       console.log(`Image URL for property ${propertyId}:`, response);
+  //       imageUrl = response; // Assign the image URL
+  //     },
+  //     (error) => {
+  //       console.error(`Error fetching image for property ${propertyId}:`, error);
+  //     }
+  //   );
+  
+  //   return imageUrl; // Return the image URL
+  // }
+
+  getImageByPropertyId(propertyId: number): Observable<string> {
+    return this.sellerService.getImageByPropertyId(propertyId).pipe(
+        catchError((error) => {
+            console.error(`Error fetching image for property ${propertyId}:`, error);
+            return of('/property1.jpg'); // Return a default image on error
+        })
     );
-  
-    return imageUrl; // Return the image URL
-  }
+}
 
 }

@@ -10,5 +10,6 @@ export interface Property {
     landmark: string;
     isActive: boolean;
     sellerId: number;
+    imageUrl: string;
   }
   
