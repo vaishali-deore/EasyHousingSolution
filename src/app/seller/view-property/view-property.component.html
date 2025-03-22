@@ -2,10 +2,13 @@
     <h2>View Properties</h2>
     <button class="add-property-btn" (click)="navigateToAddProperty()">➕ Add Property</button>
 
+    <app-loader [loading]="loading"></app-loader>
+
     <table>
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Images</th>
                 <th>Property Name</th>
                 <th>Property Type</th>
                 <th>Property Option</th>
@@ -20,6 +23,10 @@
         <tbody>
             <tr *ngFor="let property of properties">
                 <td>{{ property.propertyId }}</td>
+                <td>
+                    <img [src]="getImageByPropertyId(property.propertyId)" 
+                    alt="Property Image" class="property-img">
+                </td>
                 <td>{{ property.propertyName }}</td>
                 <td>{{ property.propertyType }}</td>
                 <td>{{ property.propertyOption }}</td>

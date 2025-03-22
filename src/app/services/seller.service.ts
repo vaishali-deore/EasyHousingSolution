@@ -67,4 +67,8 @@ export class SellerService {
     return this.http.post(`${this.apiUrl}?propertyId=${propertyId}`, formData);
   }
 
+  getImageByPropertyId(propertyId: number) {
+    return this.http.get<string>(`${this.baseUrl}/ViewImage/${propertyId}`);
+  }
+
 }
