@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
+  currentYear: number = new Date().getFullYear();
+
+  getCompanyInfo(): string {
+    return "Easy Housing Solutions - Your Trusted Real Estate Partner.";
+  }
+
 }

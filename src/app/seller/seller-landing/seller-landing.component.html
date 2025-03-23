@@ -1,28 +1,28 @@
-<!-- <div class="seller-container">
-    <h2>Welcome Seller</h2>
+<app-header></app-header>
+
+<div class="seller-container">
+  <h2>Welcome, Seller</h2>
+
+  <!-- Property Section -->
+  <div class="property-section">
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <img src="s1.jpg" alt="Property 1" class="carousel-slide">
+        <img src="s2.jpg" alt="Property 2" class="carousel-slide">
+        <img src="s3.jpg" alt="Property 3" class="carousel-slide">
+        <img src="s4.jpg" alt="Property 4" class="carousel-slide">
+        <img src="p4.jpg" alt="Property 5" class="carousel-slide">
+      </div>
+      <button class="carousel-btn prev" (click)="prevSlide()">&#10094;</button>
+      <button class="carousel-btn next" (click)="nextSlide()">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="button-container">
     <button (click)="navigateToAddProperty()">Add Property</button>
     <button (click)="navigateToViewProperty()">View Properties</button>
   </div>
-   -->
-
-
-   <app-header></app-header>
-
-   <div class="seller-container">
-    <h2>Welcome Seller</h2>
-
-    <!-- Property Image Carousel -->
-    <!-- <div class="carousel-container">
-        <button class="carousel-btn prev" (click)="prevSlide()">&#10094;</button>
-        <div class="carousel-images">
-            <img *ngFor="let img of images; let i = index" [src]="img" [class.active]="i === currentIndex">
-        </div>
-        <button class="carousel-btn next" (click)="nextSlide()">&#10095;</button>
-    </div> -->
-
-    <!-- Buttons -->
-    <button (click)="navigateToAddProperty()">Add Property</button>
-    <button (click)="navigateToViewProperty()">View Properties</button>
-    <app-footer></app-footer>
-
 </div>
+
+<app-footer></app-footer>

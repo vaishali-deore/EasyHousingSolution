@@ -1,75 +1,88 @@
 /* General container styling */
 .auth-container {
-    max-width: 400px;
-    margin: 10px auto;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    text-align: center;
+    max-width: 600px; /* Increased width */
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f0fff0; /* Light green background */
 }
 
 /* Heading */
 .auth-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #2d6a4f;
+    text-align: center;
+}
+
+/* Form Grid Layout (2 Columns) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px; /* More space between columns */
+
+}
+
+/* Full Width Inputs */
+.full-width {
+    grid-column: span 2;
 }
 
 /* Labels */
 .auth-container label {
-    display: block;
-    text-align: left;
-    margin: 10px 0 5px;
+    font-size: 14px;
     font-weight: 600;
-    color: #555;
+    color: #40916c;
 }
 
 /* Input fields and dropdowns */
-.auth-container input, 
+.auth-container input,
 .auth-container select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #b7e4c7;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px;
+    background: #e9f5e9;
     transition: all 0.3s ease-in-out;
 }
 
 /* Input focus effect */
 .auth-container input:focus,
 .auth-container select:focus {
-    border-color: #007BFF;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #1b4332;
+    box-shadow: 0 0 5px rgba(27, 67, 50, 0.5);
 }
 
-/* Button */
+/* Submit Button */
 .secondary-btn {
     width: 100%;
+    margin-top: 10px;
     padding: 12px;
-    background: #007BFF;
+    background: #40916c;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     transition: background 0.3s ease-in-out;
 }
 
 .secondary-btn:hover {
-    background: #0056b3;
+    background: #1b4332;
 }
 
 /* Login redirection text */
 .redirect-text {
+    text-align: center;
+    font-size: 13px;
+    color: #2d6a4f;
     margin-top: 15px;
-    font-size: 14px;
 }
 
 .redirect-text a {
-    color: #007BFF;
+    color: #52b788;
     text-decoration: none;
 }
 
@@ -78,37 +91,14 @@
 }
 
 /* ✅ RESPONSIVE DESIGN */
-
-/* Small screens (Phones) */
-@media (max-width: 480px) {
-    .auth-container {
-        width: 90%;
-        padding: 15px;
-    }
-    .auth-container h2 {
-        font-size: 20px;
-    }
-    .auth-container input,
-    .auth-container select {
-        font-size: 14px;
-        padding: 8px;
-    }
-    .secondary-btn {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-/* Medium screens (Tablets) */
 @media (max-width: 768px) {
     .auth-container {
-        width: 70%;
+        max-width: 500px;
     }
 }
 
-/* Large screens (Desktops) */
-@media (min-width: 1024px) {
-    .auth-container {
-        max-width: 450px;
+@media (max-width: 480px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Single column for small screens */
     }
 }

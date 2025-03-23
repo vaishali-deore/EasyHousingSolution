@@ -36,12 +36,12 @@ import { FooterComponent } from '../../components/footer/footer.component';
   styleUrls: ['./seller-landing.component.css']
 })
 export class SellerLandingComponent {
-  images: string[] = [
-    'assets/property1.jpg',
-    'assets/property2.jpg',
-    'assets/property3.jpg'
-  ];
-  currentIndex = 0;
+ 
+  // currentSlide = 0;
+  // currentIndex = 0;
+
+  // currentIndex = 0;
+  // totalSlides = 5; // Updated to 5 slides
 
   constructor(private router: Router) {}
 
@@ -53,11 +53,32 @@ export class SellerLandingComponent {
     this.router.navigate(['/seller/view-property']);
   }
 
-  prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-  }
+  currentSlideIndex = 0;
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    const totalSlides = document.querySelectorAll('.carousel-slide').length;
+    if (this.currentSlideIndex < totalSlides - 1) {
+      this.currentSlideIndex++;
+    } else {
+      this.currentSlideIndex = 0; // Loop back to first image
+    }
+    this.updateSlidePosition();
   }
+  
+  prevSlide() {
+    const totalSlides = document.querySelectorAll('.carousel-slide').length;
+    if (this.currentSlideIndex > 0) {
+      this.currentSlideIndex--;
+    } else {
+      this.currentSlideIndex = totalSlides - 1; // Loop to last image
+    }
+    this.updateSlidePosition();
+  }
+  
+  updateSlidePosition() {
+    const carouselWrapper = document.querySelector('.carousel-wrapper') as HTMLElement;
+    carouselWrapper.style.transform = `translateX(-${this.currentSlideIndex * 100}%)`;
+  }
+  
+  
 }

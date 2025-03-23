@@ -37,11 +37,21 @@ export class HeaderComponent implements OnInit {
     confirm('are u want to log out application');
     // clear local storage
     localStorage.clear();
-
     // ✅ Clear session storage or authentication data if needed
     sessionStorage.clear();
-
     // ✅ Redirect to the home page
     this.router.navigate(['/']);
+  }
+
+  home(){
+    this.router.navigate(['/']);
+  }
+
+  singUp() {
+    this.router.navigate(['/signup']);
+  }
+
+  login() {
+    this.router.navigate(['/login']);
   }
 }
