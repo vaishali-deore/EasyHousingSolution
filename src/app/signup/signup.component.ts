@@ -6,6 +6,7 @@ import { HeaderComponent } from '../components/header/header.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -27,6 +28,10 @@ export class SignupComponent {
   stateId: number | null = null;
   cityId: number | null = null;
   message: string = '';
+
+
+  isSubmitted: boolean = false; // Track if form is submitted
+
 
   // Sample State & City Data (Ideally, fetch this from an API)
   states = [
@@ -61,6 +66,24 @@ export class SignupComponent {
   }
   
   signup() {
+
+    this.isSubmitted = true; // Mark form as submitted to show red borders
+
+    if (!this.userName.trim() || !this.password.trim() || !this.firstName.trim() || !this.lastName.trim() ||
+        !this.dateofBirth || !this.phoneNo.trim() || !this.emailId.trim() || !this.address.trim() ||
+        !this.stateId || !this.cityId || !this.userType) {
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill in all required fields!',
+        confirmButtonColor: '#218838'
+      });
+
+      return;
+    }
+
+
     const signupPayload = {
       userName: this.userName,
       password: this.password,

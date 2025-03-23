@@ -5,6 +5,8 @@ import { HeaderComponent } from '../components/header/header.component';
 import { FooterComponent } from '../components/footer/footer.component';
 import { AuthService } from '../services/auth.service';
 // import { AuthService } from '../services/auth.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -25,6 +27,27 @@ export class LoginComponent {
   }
 
   login() {
+    let errorMessage = '';
+
+    if (!this.userName.trim() && !this.password.trim()) {
+      errorMessage = 'Username and Password are required!';
+    } else if (!this.userName.trim()) {
+      errorMessage = 'Username is required!';
+    } else if (!this.password.trim()) {
+      errorMessage = 'Password is required!';
+    }
+  
+    if (errorMessage) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessage,
+        confirmButtonColor: '#218838'
+      });
+      return;
+    }
+  
+
     this.authService.login(this.userName, this.password).subscribe(
       (response: any) => {
         console.log('Login Successful', response);

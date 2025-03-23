@@ -102,3 +102,23 @@
         grid-template-columns: 1fr; /* Single column for small screens */
     }
 }
+
+
+.error-border {
+    border: 2px solid red !important;
+    background-color: #ffe6e6;
+  }
+  
+  input, select {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  input:focus, select:focus {
+    outline: none;
+    border-color: #218838;
+    box-shadow: 0 0 5px rgba(33, 136, 56, 0.5);
+  }
+  

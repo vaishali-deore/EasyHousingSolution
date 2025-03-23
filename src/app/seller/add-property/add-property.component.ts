@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SellerService } from '../../services/seller.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-property',
@@ -26,6 +27,9 @@ export class AddPropertyComponent {
   images: File[] = []; // Store selected image files
   errorMessage: string = ''; // Error message for exceeding limit
 
+  isSubmitted = false;
+
+
   constructor(private sellerService: SellerService, private router: Router) {}
 
   getSellerId(): number {
@@ -41,7 +45,19 @@ export class AddPropertyComponent {
     }
   }
 
-  addProperty() {
+  addProperty(event: Event) {
+    event.preventDefault();
+    this.isSubmitted = true;
+
+    if (!this.propertyName || !this.propertyType || !this.propertyOption || !this.description || !this.address || !this.priceRange || !this.landmark) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Missing Fields!',
+        text: 'Please fill all the required fields before submitting.',
+      });
+      return;
+    }
+
     const propertyData = {
       propertyId: 0,
       propertyName: this.propertyName,
