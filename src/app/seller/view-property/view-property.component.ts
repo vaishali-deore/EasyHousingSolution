@@ -55,38 +55,28 @@ export class ViewPropertyComponent implements OnInit {
 
   loadProperties() {
     this.loading = true;
-    
     this.sellerService.getAllProperties().subscribe(
-        (response) => {
-            console.log('res::get all property ', response);
-            this.properties = response;
-
-            // Create an array of observables to fetch all images
-            const imageRequests = this.properties.map(property =>
-                this.getImageByPropertyId(property.propertyId).pipe(
-                    map(imageUrl => ({ ...property, imageUrl })) // Attach image URL to property
-                )
-            );
-
-            // Wait for all image requests to complete
-            forkJoin(imageRequests).subscribe(
-                updatedProperties => {
-                    this.properties = updatedProperties; // Assign properties with images
-                    this.loading = false;
-                    console.log('************ Updated Properties:', this.properties);
-                },
-                error => {
-                    console.error('Error fetching property images:', error);
-                    this.loading = false;
-                }
-            );
-        },
-        (error) => {
-            console.error('Error fetching properties:', error);
-            alert('Failed to fetch properties.');
-            this.loading = false;
-        }
-    );
+      (response) => {
+          this.properties = response;
+  
+          // Fetch images and update properties
+          forkJoin(
+              this.properties.map((property) =>
+                  this.getImageByPropertyId(property.propertyId).pipe(
+                      map((imageUrl) => ({ ...property, imageUrl }))
+                  )
+              )
+          ).subscribe((updatedProperties) => {
+              this.properties = updatedProperties;
+          });
+          this.loading=false;
+      },
+      (error) => {
+          console.error('Error fetching properties:', error);
+          this.loading=false;
+      }
+  );
+  
 }
 
 
@@ -136,11 +126,18 @@ export class ViewPropertyComponent implements OnInit {
 
   getImageByPropertyId(propertyId: number): Observable<string> {
     return this.sellerService.getImageByPropertyId(propertyId).pipe(
+        map((response: any) => {
+            if (response && response.image1) {
+                return `data:image/jpeg;base64,${response.image1}`; // Assuming JPEG format
+            }
+            return 'assets/images/property1.jpg'; // Default fallback image
+        }),
         catchError((error) => {
             console.error(`Error fetching image for property ${propertyId}:`, error);
-            return of('/property1.jpg'); // Return a default image on error
+            return of('assets/images/property1.jpg'); // Return a default image on error
         })
     );
 }
+
 
 }
