@@ -23,15 +23,16 @@
         <tbody>
             <tr *ngFor="let property of properties">
                 <td>{{ property.propertyId }}</td>
-                <!-- <td>
-                    <img [src]="getImageByPropertyId(property.propertyId)" 
-                    alt="Property Image" class="property-img">
-                </td> -->
+                <td>
+                    <img [src]="getImageByPropertyId(property.propertyId) | async" 
+                         alt="Property Image" class="property-img">
+                </td>
+                
 
-
+<!-- 
                 <td>
                     <img [src]="property.imageUrl" alt="Property Image" class="property-img">
-                </td>
+                </td> -->
 
                 
                 <td>{{ property.propertyName }}</td>

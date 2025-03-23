@@ -67,16 +67,8 @@ export class SellerService {
     return this.http.post(`${this.apiUrl}?propertyId=${propertyId}`, formData);
   }
 
-  // getImageByPropertyId(propertyId: number) {
-  //   return this.http.get(`${this.baseUrl}/ViewImage/${propertyId}`);
-
-  //   // return this.http.get<string>(`${this.baseUrl}/ViewImage/${propertyId}`);
-  // }
-
-  getImageByPropertyId(propertyId: number) {
-    return this.http.get<{ image1: string }>(`${this.baseUrl}/ViewImage${propertyId}`);
-}
-
-
-
+  getImageByPropertyId(propertyId: number): Observable<{ image1: string }> {
+    return this.http.get<{ image1: string }>(`${this.baseUrl}/ViewImage/${propertyId}`);
+  }
+  
 }

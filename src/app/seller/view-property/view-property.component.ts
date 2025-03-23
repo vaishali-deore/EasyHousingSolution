@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Property } from './view-property.model';
 import { SellerService } from '../../services/seller.service';
 import { LoaderComponent } from '../../shared/loader/loader.component';
-import { catchError, forkJoin, map, Observable, of } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-view-property',
@@ -25,59 +25,31 @@ export class ViewPropertyComponent implements OnInit {
   }
 
   // 🔹 Fetch Properties from API
-  // loadProperties() {
-  // this.loading = true;
-  //   this.sellerService.getAllProperties().subscribe(
-  //     (response) => {
-  //       console.log('res::get all proeprty ',response)
-  //       this.properties = response;
-  //       // Fetch image URLs for each property
-  //       this.properties.forEach((property) => {
-  //         this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
-  //           property.imageUrl = imageUrl; // Store image URL in the property object
-  //         });
-  //         this.loading = false;
-  //         });
-  //         console.log('************',this.properties);
-
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching properties:', error);
-  //       alert('Failed to fetch properties.');
-  //       this.loading = false;
-
-  //     }
-  //   );
-  // }
-
-
-  //New Property and image api
-
   loadProperties() {
-    this.loading = true;
+  this.loading = true;
     this.sellerService.getAllProperties().subscribe(
       (response) => {
-          this.properties = response;
-  
-          // Fetch images and update properties
-          forkJoin(
-              this.properties.map((property) =>
-                  this.getImageByPropertyId(property.propertyId).pipe(
-                      map((imageUrl) => ({ ...property, imageUrl }))
-                  )
-              )
-          ).subscribe((updatedProperties) => {
-              this.properties = updatedProperties;
-          });
-          this.loading=false;
+        console.log('res::get all proeprty ',response)
+        this.properties = response;
+        this.loading = false;
+
+        // Fetch image URLs for each property
+        // this.properties.forEach((property) => {
+        //   this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
+        //     property.imageUrl = imageUrl; // Store image URL in the property object
+        //   });
+        //   });
+          console.log("get all proeprty res",this.properties);
+
       },
       (error) => {
-          console.error('Error fetching properties:', error);
-          this.loading=false;
+        console.error('Error fetching properties:', error);
+        alert('Failed to fetch properties.');
+        this.loading = false;
+
       }
-  );
-  
-}
+    );
+  }
 
 
   
@@ -107,37 +79,19 @@ export class ViewPropertyComponent implements OnInit {
     }
   }
   
-
-  // getImageByPropertyId(propertyId: number): string {
-  //   let imageUrl = '';
-  
-  //   this.sellerService.getImageByPropertyId(propertyId).subscribe(
-  //     (response) => {
-  //       console.log(`Image URL for property ${propertyId}:`, response);
-  //       imageUrl = response; // Assign the image URL
-  //     },
-  //     (error) => {
-  //       console.error(`Error fetching image for property ${propertyId}:`, error);
-  //     }
-  //   );
-  
-  //   return imageUrl; // Return the image URL
-  // }
-
   getImageByPropertyId(propertyId: number): Observable<string> {
     return this.sellerService.getImageByPropertyId(propertyId).pipe(
-        map((response: any) => {
-            if (response && response.image1) {
-                return `data:image/jpeg;base64,${response.image1}`; // Assuming JPEG format
-            }
-            return 'assets/images/property1.jpg'; // Default fallback image
-        }),
-        catchError((error) => {
-            console.error(`Error fetching image for property ${propertyId}:`, error);
-            return of('assets/images/property1.jpg'); // Return a default image on error
-        })
+      tap(response => console.log("API Response:", response)), // Log API response
+      map(response => {
+        const imageUrl = `data:image/jpeg;base64,${response}`; // Treat response as a Base64 string
+        console.log("Converted Image URL:", imageUrl); // Log converted URL
+        return imageUrl;
+      }),
+      catchError((error) => {
+        console.error(`Error fetching image for property ${propertyId}:`, error);
+        return of('property1.jpg'); // Fallback to default image
+      })
     );
-}
-
-
+  }
+  
 }
