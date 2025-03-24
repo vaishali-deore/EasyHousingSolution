@@ -8,6 +8,8 @@ import { Property } from '../seller/view-property/view-property.model';
 })
 export class BuyerService {
   private baseUrl = 'http://localhost:5052/api/Seller';
+  private sellerDetails = 'http://localhost:5052/api/Buyer/GetOwnerContactDetails';
+  private addToWishList = 'http://localhost:5052/api/Gateway';
 
   constructor(private http: HttpClient) {}
      // 🔹 Get all properties
@@ -27,11 +29,16 @@ export class BuyerService {
       const url = `http://localhost:5052/api/Buyer/SearchProperty?region=${region}&type=${type}&priceOrder=${priceOrder || 'asc'}`;
       return this.http.get(url);
   }
+
+  getSellerDetails(propertyId: number): Observable<any> {
+    return this.http.get<any>(`${this.sellerDetails}?propertyId=${propertyId}`);
+  }
   
 
-  addToCart(property: any) {
+  addToCart(buyerId: number, propertyId: number): Observable<any> {
+    const url = `${this.addToWishList}/AddToWishList/?buyerId=${buyerId}&propertyId=${propertyId}`;
+    return this.http.post(url, null); // No body needed
   }
-
   viewCart() {  }
 
 }

@@ -11,9 +11,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdminViewPropertyComponent } from './admin/view-property/view-property.component';
 import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
 import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
-import { UserLandingComponent } from './user/landing/landing.component';
-import { PropertyListComponent } from './user/property-list/property-list.component';
-import { PropertyCardComponent } from './components/property-card/property-card.component';
 import { UpdatePropertyComponent } from './seller/update-property/update-property.component';
 // import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
 // import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
@@ -25,30 +22,13 @@ export const routes: Routes = [
   { path: 'seller', component: SellerLandingComponent },
   { path: 'seller/add-property', component: AddPropertyComponent },
   { path: 'seller', component: SellerLandingComponent },
-  { path: 'admin', component: AdminLandingComponent 
-
-
-    // children: [
-    //   { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
-    //   { path: 'view-property-region', component: ViewPropertyRegionComponent }
-    // ]
-
-  },
+  { path: 'admin', component: AdminLandingComponent   },
   { path: 'components/header', component: HeaderComponent },
   { path: 'admin/view-property', component: AdminViewPropertyComponent },
   { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
   { path: 'view-property-region', component: ViewPropertyRegionComponent },
-  { path: 'userlanding', component: UserLandingComponent },
-  { path: 'propertylist', component: PropertyListComponent },
-  { path: 'components/card', component: PropertyCardComponent },
   { path: 'update-property/:id', component: UpdatePropertyComponent },
   
-  
-
-
-
-  // Lazy load the Seller module
-  // { path: 'seller', loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule) },
 
 ];
 

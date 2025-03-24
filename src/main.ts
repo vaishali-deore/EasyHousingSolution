@@ -11,14 +11,12 @@ import { AdminLandingComponent } from './app/admin/admin-landing/admin-landing.c
 import { HeaderComponent } from './app/components/header/header.component';
 import { ViewPropertyRegionComponent } from './app/admin/view-property-region/view-property-region.component';
 import { ViewPropertyOwnerComponent } from './app/admin/view-property-owner/view-property-owner.component';
-import { UserLandingComponent } from './app/user/landing/landing.component';
-import { PropertyListComponent } from './app/user/property-list/property-list.component';
-import { PropertyCardComponent } from './app/components/property-card/property-card.component';
 import { provideHttpClient } from '@angular/common/http';
 import { UpdatePropertyComponent } from './app/seller/update-property/update-property.component';
 
 bootstrapApplication(AppComponent, {
-  providers: [ [provideHttpClient()],
+  providers: [
+    [provideHttpClient()],
     provideRouter([
       { path: '', component: LandingComponent },
       { path: 'login', component: LoginComponent },
@@ -27,16 +25,10 @@ bootstrapApplication(AppComponent, {
       { path: 'seller/add-property', component: AddPropertyComponent },
       { path: 'seller/view-property', component: ViewPropertyComponent },
       { path: 'admin', component: AdminLandingComponent },
-      { path: 'components/header', component: HeaderComponent },      
-        { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
-        { path: 'view-property-region', component: ViewPropertyRegionComponent },
-        { path: 'userlanding', component: UserLandingComponent },
-          { path: 'propertylist', component: PropertyListComponent },
-          { path: 'components/card', component: PropertyCardComponent },
-            { path: 'update-property/:id', component: UpdatePropertyComponent },
-          
-        
-      
-    ])
-  ]
-}).catch(err => console.error(err));
+      { path: 'components/header', component: HeaderComponent },
+      { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
+      { path: 'view-property-region', component: ViewPropertyRegionComponent },
+      { path: 'update-property/:id', component: UpdatePropertyComponent },
+    ]),
+  ],
+}).catch((err) => console.error(err));
