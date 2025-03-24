@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="container">
+  <h1>Welcome to Easy Housing Solutions</h1>
+  <p>Your one-stop solution for finding your dream home.</p>
+
+  <!-- Search Section -->
+  <div class="search-container">
+    <h2>Search Properties</h2>
+
+    <div class="search-form">
+      <select [(ngModel)]="searchCriteria.propertyType">
+        <option value="">All Types</option>
+        <option value="apartment">Apartment</option>
+        <option value="villa">Villa</option>
+        <option value="house">House</option>
+        <option value="commercial">Commercial</option>
+      </select>
+      <input type="text" [(ngModel)]="searchCriteria.region" placeholder="Region">
+      <select id="priceRange" [(ngModel)]="searchCriteria.priceRange">
+        <option value="asc">Sort By Price</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+            <button class="search-btn" (click)="searchProperties()">Search</button>
+    </div>
+  </div>
+
+  <!-- Property Listings -->
+  <div class="property-list">
+    <h3 *ngIf="properties.length > 0">Search Results:</h3>
+    <h3 *ngIf="properties.length === 0 && showResults">No Properties Found</h3>
+  
+    <div class="grid-container">
+      <div *ngFor="let property of properties" class="property-card">
+        <img [src]="property.imageUrl ? property.imageUrl : 's4.jpg'" 
+          alt="{{ property.propertyName }}" class="property-image">
+  
+        <div class="property-details">
+          <h4>{{ property.propertyName }}</h4>
+          <p><strong>Type:</strong> {{ property.propertyType }}</p>
+          <p><strong>Option:</strong> {{ property.propertyOption }}</p>
+          <p><strong>Address:</strong> {{ property.address }}</p>
+          <p><strong>Price:</strong> {{ property.priceRange }}</p>
+          <p><strong>Initial Deposit:</strong> {{ property.initialDeposit }}</p>
+          <p><strong>Landmark:</strong> {{ property.landmark }}</p>
+  
+          <!-- Action Buttons -->
+          <div class="button-group">
+            <button class="btn buy-btn" (click)="buyProperty(property)">Buy</button>
+            <button class="btn cart-btn" (click)="addToCart(property)">Add to Cart</button>
+            <button class="btn seller-btn" (click)="getSellerDetails(property.sellerId)">Seller Contact</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<app-footer></app-footer>
