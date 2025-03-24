@@ -34,8 +34,9 @@
 
     <div class="grid-container">
       <div *ngFor="let property of filteredProperties" class="property-card">
-        <img [src]="property.imageUrl" alt="{{ property.propertyName }}" class="property-image">
-        <div class="property-details">
+        <img [src]="property.imageUrl ? property.imageUrl : 's4.jpg'" 
+        alt="{{ property.propertyName }}" 
+        class="property-image">        <div class="property-details">
           <h4>{{ property.propertyName }}</h4>
           <p><strong>Type:</strong> {{ property.propertyType }}</p>
           <p><strong>Option:</strong> {{ property.propertyOption }}</p>
