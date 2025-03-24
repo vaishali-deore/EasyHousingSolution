@@ -55,7 +55,11 @@ export class LandingComponent implements OnInit {
 
   showResults = false;
 
+  userType: string | null = null;
+
+
   ngOnInit() {
+    this.userType = localStorage.getItem('userType');
     this.loadProperties();
   }
 
@@ -96,10 +100,10 @@ export class LandingComponent implements OnInit {
   }
 
   // 🛍 View Cart
-  viewCart() {
-    alert('Redirecting to cart...');
-    this.router.navigate(['components/cart']); // Corrected path
-  }
+  // viewCart() {
+  //   alert('Redirecting to cart...');
+  //   this.router.navigate(['components/cart']); // Corrected path
+  // }
 
   buyProperty(property: Property) {
     Swal.fire({

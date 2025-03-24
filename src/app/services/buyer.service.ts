@@ -8,9 +8,10 @@ import { Property } from '../seller/view-property/view-property.model';
 })
 export class BuyerService {
   private baseUrl = 'http://localhost:5052/api/Seller';
-  private sellerDetails =
-    'http://localhost:5052/api/Buyer/GetOwnerContactDetails';
+  private sellerDetails = 'http://localhost:5052/api/Buyer/GetOwnerContactDetails';
   private addToWishList = 'http://localhost:5052/api/Gateway';
+  private getWishList = 'http://localhost:5052/api/Buyer/GetWishlist';
+  private DeleteFromWishList = 'http://localhost:5052/api/Gateway';
 
   constructor(private http: HttpClient) {}
   // 🔹 Get all properties
@@ -46,20 +47,13 @@ export class BuyerService {
 
   getWishlist(buyerId: number): Observable<any[]> {
     return this.http.get<any[]>(
-      `${this.baseUrl}/GetWishlist?buyerId=${buyerId}`
+      `${this.getWishList}/?buyerId=${buyerId}`
     );
   }
 
   deleteFromWishlist(buyerId: number, propertyId: number): Observable<any> {
     return this.http.delete(
-      `${this.baseUrl}/RemoveFromWishlist?buyerId=${buyerId}&propertyId=${propertyId}`
-    );
-  }
-
-  buyProperty(propertyId: number): Observable<any> {
-    return this.http.post(
-      `${this.baseUrl}/BuyProperty?propertyId=${propertyId}`,
-      null
+      `${this.DeleteFromWishList}/DeleteFromWishList/?buyerId=${buyerId}&propertyId=${propertyId}`
     );
   }
 }

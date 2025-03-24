@@ -27,6 +27,7 @@ export class LoginComponent {
   }
 
   login() {
+     
     let errorMessage = '';
 
     if (!this.userName.trim() && !this.password.trim()) {
@@ -64,7 +65,7 @@ export class LoginComponent {
         if (this.userType.toLowerCase() === 'seller') {
           this.router.navigate(['/seller']);
         } else if (this.userType.toLowerCase() === 'buyer') {
-          this.router.navigate(['/userlanding']);
+          this.router.navigate(['/']);
         } else if (this.userType.toLowerCase() === 'admin') {
           this.router.navigate(['/admin']);
         } else {

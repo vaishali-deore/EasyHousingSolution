@@ -12,6 +12,7 @@ import { AdminViewPropertyComponent } from './admin/view-property/view-property.
 import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
 import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
 import { UpdatePropertyComponent } from './seller/update-property/update-property.component';
+import { WishlistComponent } from './buyer/wishlist/wishlist.component';
 // import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
 // import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
 
@@ -28,6 +29,7 @@ export const routes: Routes = [
   { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
   { path: 'view-property-region', component: ViewPropertyRegionComponent },
   { path: 'update-property/:id', component: UpdatePropertyComponent },
+  { path: 'buyer/wishlist', component: WishlistComponent },
   
 
 ];

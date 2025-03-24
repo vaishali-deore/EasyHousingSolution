@@ -46,7 +46,7 @@
           <p><strong>Landmark:</strong> {{ property.landmark }}</p>
   
           <!-- Action Buttons -->
-          <div class="button-group">
+          <div class="button-group" *ngIf="userType === 'buyer'">
             <button class="btn buy-btn" (click)="buyProperty(property)">Buy</button>
             <button class="btn cart-btn" (click)="addToCart(property)">Add to Cart</button>
             <button class="btn seller-btn" (click)="getSellerDetails(property.sellerId)">Seller Contact</button>

@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
     sessionStorage.clear();
     // ✅ Redirect to the home page
     this.router.navigate(['/']);
+    
   }
 
   home(){
@@ -53,5 +54,9 @@ export class HeaderComponent implements OnInit {
 
   login() {
     this.router.navigate(['/login']);
+  }
+
+  wishlist() {
+    this.router.navigate(['/buyer/wishlist']);
   }
 }

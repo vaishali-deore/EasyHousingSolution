@@ -18,10 +18,12 @@
   /* Content Styling */
   .dialog-content {
     font-size: 16px;
+    justify-content: center;
     color: #333;
-    text-align: left;
+    /* text-align: left; */
     line-height: 1.6;
     padding: 10px 0;
+    margin-left: 100px;
   }
   
   /* Actions (Button Section) */

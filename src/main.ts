@@ -13,6 +13,7 @@ import { ViewPropertyRegionComponent } from './app/admin/view-property-region/vi
 import { ViewPropertyOwnerComponent } from './app/admin/view-property-owner/view-property-owner.component';
 import { provideHttpClient } from '@angular/common/http';
 import { UpdatePropertyComponent } from './app/seller/update-property/update-property.component';
+import { WishlistComponent } from './app/buyer/wishlist/wishlist.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -29,6 +30,8 @@ bootstrapApplication(AppComponent, {
       { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
       { path: 'view-property-region', component: ViewPropertyRegionComponent },
       { path: 'update-property/:id', component: UpdatePropertyComponent },
+        { path: 'buyer/wishlist', component: WishlistComponent },
+      
     ]),
   ],
 }).catch((err) => console.error(err));
