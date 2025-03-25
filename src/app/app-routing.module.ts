@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 import { SellerLandingComponent } from './seller/seller-landing/seller-landing.component'
 import { AddPropertyComponent } from './seller/add-property/add-property.component';
 import { ViewPropertyComponent } from './seller/view-property/view-property.component';

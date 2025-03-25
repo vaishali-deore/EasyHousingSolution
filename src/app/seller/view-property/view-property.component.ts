@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Property } from './view-property.model';
 import { SellerService } from '../../services/seller.service';
-import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
 
 @Component({

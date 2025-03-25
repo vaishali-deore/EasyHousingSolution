@@ -8,7 +8,7 @@ import { BuyerService } from '../services/buyer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SellerDetailsDialogComponent } from '../components/seller-details-dialog/seller-details-dialog.component';
 import Swal from 'sweetalert2';
-import { LoaderComponent } from '../shared/loader/loader.component';
+import { LoaderComponent } from '../components/loader/loader.component';
 
 export interface Property {
   propertyId: number;

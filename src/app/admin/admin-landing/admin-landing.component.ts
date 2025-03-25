@@ -4,7 +4,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { AdminService } from '../../services/admin.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 import { Property } from '../../landing/landing.component';
 
 @Component({

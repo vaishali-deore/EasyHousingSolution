@@ -5,7 +5,7 @@ import { HeaderComponent } from "../../components/header/header.component";
 import { FooterComponent } from "../../components/footer/footer.component";
 import Swal from 'sweetalert2';
 import { Property } from '../../landing/landing.component';
-import { LoaderComponent } from '../../shared/loader/loader.component';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-wishlist',
