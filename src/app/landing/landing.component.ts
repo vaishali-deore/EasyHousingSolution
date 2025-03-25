@@ -57,16 +57,16 @@ export class LandingComponent implements OnInit {
   };
 
    imagePaths = [
-    '/images/img_1.jpg',
-    '/images/img_2.jpg',
-    '/images/img_3.jpg',
-    '/images/img_4.jpg',
-    '/images/img_5.jpg',
-    '/images/img_6.jpg',
-    '/images/img_7.jpg',
-    '/images/img_8.jpg',
-    '/images/img_9.jpg',
-    '/images/img_10.jpg'
+    'img_1.jpg',
+    'img_2.jpg',
+    'img_3.jpg',
+    'img_4.jpg',
+    'img_5.jpg',
+    'img_6.jpg',
+    'img_7.jpg',
+    'img_8.jpg',
+    'img_9.jpg',
+    'img_10.jpg'
 ];
 
   showResults = false;
