@@ -59,4 +59,23 @@ export class HeaderComponent implements OnInit {
   wishlist() {
     this.router.navigate(['/buyer/wishlist']);
   }
+
+  signUpSeller() {
+    this.router.navigate(['/signup']);
+  
+  }
+  
+  viewSellerProperties() {
+   this.router.navigate(['seller/view-property']);
+  }
+  
+
+
+  manageUsers() {
+   alert('work in progress..!!')
+  }
+  
+  viewAdminProperties() {
+    this.router.navigate(['admin']);
+  }
 }

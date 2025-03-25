@@ -5,6 +5,26 @@
     <a (click)="home()">Home</a>
     <a (click)="login()">Login</a>
     <a (click)="singUp()">Sign Up </a>
+
+      <!-- Seller Dropdown -->
+      <div class="dropdown">
+        <a class="dropbtn">Seller</a>
+        <div class="dropdown-content">
+          <a (click)="signUpSeller()">Register as Seller</a>
+          <a (click)="viewSellerProperties()">View Properties</a>
+        </div>
+      </div>
+
+
+       <!-- Admin Dropdown -->
+    <div class="dropdown">
+      <a class="dropbtn">Admin</a>
+      <div class="dropdown-content">
+        <a (click)="manageUsers()">Manage Users</a>
+        <a (click)="viewAdminProperties()">View Properties</a>
+      </div>
+    </div>
+
     <a>Settings</a>
     <a (click)="wishlist()">View Card</a>
     <a (click)="logout()">Logout</a>

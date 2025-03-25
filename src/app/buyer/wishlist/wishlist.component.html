@@ -1,8 +1,9 @@
 
 <app-header></app-header>
+<app-loader [loading]="loading"></app-loader>
 <div class="grid-container">
     <div *ngFor="let property of wishlist" class="property-card">
-      <img [src]="property.imageUrl ? property.imageUrl : 'assets/s4.jpg'" 
+      <img [src]="property.imageUrl ? property.imageUrl : 's4.jpg'" 
         alt="{{ property.propertyName }}" class="property-image">
   
       <div class="property-details">

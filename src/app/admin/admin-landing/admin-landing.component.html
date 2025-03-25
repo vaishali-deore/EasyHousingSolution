@@ -2,17 +2,65 @@
 
 <div class="admin-container">
   <h2>Welcome to Admin Dashboard</h2>
-  <!-- <p>Manage users, properties, and more.</p> -->
 
-  <div class="button-group">
-    <button (click)="navigateToPropertyOwner()">View Property by Owner</button>
-    <button (click)="navigateToPropertyRegion()">View Property by Region</button>
+  <app-loader [loading]="loading"></app-loader>
+
+
+  <!-- Search Filters -->
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchRegion" placeholder="Search by Region" class="search-input">
+    <input type="text" [(ngModel)]="searchOwner" placeholder="Search by Owner" class="search-input">
+    <button (click)="searchProperties()" class="btn search-btn">Search</button>
   </div>
 
-  <!-- <router-outlet></router-outlet> -->
+  <!-- Property Grid View -->
+  <div class="property-grid" *ngIf="true">
+    <div *ngFor="let property of properties" class="property-card">
+      <img [src]="property.imageUrl ? property.imageUrl : 's4.jpg'" alt="{{ property.propertyName }}" class="property-image">
+      
+      <div class="property-details">
+        <h4>{{ property.propertyName }}</h4>
+        <p><strong>Region:</strong> {{ property.region }}</p>
+        <p><strong>Owner:</strong> {{ property.owner }}</p>
+        <p><strong>Price:</strong> {{ property.priceRange }}</p>
 
+        <!-- Action Buttons -->
+        <div class="button-group">
+          <button class="btn activate-btn" (click)="activateProperty(property)">Activate</button>
+          <button class="btn deactivate-btn" (click)="deActivateProperty(property)">DeActivate</button>
+        </div>
+      </div>
+    </div>
+  </div> 
 
-  <app-admin-view-property></app-admin-view-property>
+  <!-- Property Table View (After Searching) -->
+  <!-- <table class="property-table" *ngIf="true">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Property Name</th>
+        <th>Region</th>
+        <th>Owner</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties">
+        <td>
+          <img [src]="property.imageUrl ? property.imageUrl : 's4.jpg'" alt="{{ property.propertyName }}" class="table-image">
+        </td>
+        <td>{{ property.propertyName }}</td>
+        <td>{{ property.region }}</td>
+        <td>{{ property.owner }}</td>
+        <td>{{ property.priceRange }}</td>
+        <td>
+          <button class="btn activate-btn" (click)="activateProperty(property)">Activate</button>
+          <button class="btn deactivate-btn" (click)="deActivateProperty(property.id)">DeActivate</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
 </div>
 
 <app-footer></app-footer>

@@ -3,6 +3,7 @@
 <div class="container">
   <h1>Welcome to Easy Housing Solutions</h1>
   <p>Your one-stop solution for finding your dream home.</p>
+  <app-loader [loading]="loading"></app-loader>
 
   <!-- Search Section -->
   <div class="search-container">
@@ -47,6 +48,7 @@
   
           <!-- Action Buttons -->
           <div class="button-group" *ngIf="userType === 'buyer'">
+            <!-- <div class="button-group"> -->
             <button class="btn buy-btn" (click)="buyProperty(property)">Buy</button>
             <button class="btn cart-btn" (click)="addToCart(property)">Add to Cart</button>
             <button class="btn seller-btn" (click)="getSellerDetails(property.sellerId)">Seller Contact</button>

@@ -8,6 +8,7 @@ import { BuyerService } from '../services/buyer.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SellerDetailsDialogComponent } from '../components/seller-details-dialog/seller-details-dialog.component';
 import Swal from 'sweetalert2';
+import { LoaderComponent } from '../shared/loader/loader.component';
 
 export interface Property {
   propertyId: number;
@@ -33,12 +34,14 @@ export interface Property {
     FormsModule,
     HeaderComponent,
     FooterComponent,
+    LoaderComponent,
   ],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
 })
 export class LandingComponent implements OnInit {
   properties: Property[] = [];
+  loading = false;
   buyerId = 101; // Replace with dynamic buyerId if needed
 
   constructor(
@@ -57,7 +60,6 @@ export class LandingComponent implements OnInit {
 
   userType: string | null = null;
 
-
   ngOnInit() {
     this.userType = localStorage.getItem('userType');
     this.loadProperties();
@@ -65,22 +67,26 @@ export class LandingComponent implements OnInit {
 
   // 🔹 Fetch Properties from API or Set Default Data
   loadProperties() {
+    this.loading = true;
     this.propertyService.getAllProperties().subscribe(
       (response) => {
         console.log('Fetched properties:', response);
         this.properties = response;
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching properties:', error);
         alert('Failed to fetch properties.');
         // Load default data if API fails
         this.properties = [...defaultData];
+        this.loading = false;
       }
     );
   }
 
   // 🔍 Search Properties
   searchProperties() {
+    this.loading = true;
     console.log('Search criteria:', this.searchCriteria);
     this.propertyService
       .searchProperties(
@@ -92,9 +98,11 @@ export class LandingComponent implements OnInit {
         (data: any) => {
           console.log('Search results:', data);
           this.properties = data;
+          this.loading = false;
         },
         (error) => {
           console.error('Error searching properties:', error);
+          this.loading = false;
         }
       );
   }
@@ -114,15 +122,26 @@ export class LandingComponent implements OnInit {
     });
   }
 
-
   addToCart(property: any) {
     this.propertyService.addToCart(this.buyerId, property.propertyId).subscribe(
       (response) => {
         console.log('Added to cart:', response);
-        alert(`${property.propertyName} added to cart!`);
+        // alert(`${property.propertyName} added to cart!`);
+        Swal.fire({
+          icon: 'success',
+          title: 'Oops...',
+          text: `${property.propertyName} added to cart!`,
+          confirmButtonColor: '#218838',
+        });
       },
       (error) => {
         console.error('Error adding to cart:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${property.propertyName} Not added !`,
+          confirmButtonColor: '#218838',
+        });
       }
     );
   }

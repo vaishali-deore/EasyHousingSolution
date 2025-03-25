@@ -5,16 +5,19 @@ import { HeaderComponent } from "../../components/header/header.component";
 import { FooterComponent } from "../../components/footer/footer.component";
 import Swal from 'sweetalert2';
 import { Property } from '../../landing/landing.component';
+import { LoaderComponent } from '../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent,LoaderComponent],
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
   buyerId = 101; // Dynamic if needed
   wishlist: any[] = [];
+  loading = false;
+
 
   constructor(private wishlistService: BuyerService) {}
 
@@ -23,12 +26,15 @@ export class WishlistComponent implements OnInit {
   }
 
   loadWishlist() {
+    this.loading = true;
     this.wishlistService.getWishlist(this.buyerId).subscribe(
       (data) => {
         this.wishlist = data;
+        this.loading = false;
       },
       (error) => {
         console.error('Error loading wishlist:', error);
+        this.loading = false;
         
         // Set hardcoded wishlist data when an error occurs
         this.wishlist = [

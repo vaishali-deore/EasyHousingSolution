@@ -8,9 +8,6 @@ import { AddPropertyComponent } from './seller/add-property/add-property.compone
 import { ViewPropertyComponent } from './seller/view-property/view-property.component';
 import { AdminLandingComponent } from './admin/admin-landing/admin-landing.component';
 import { HeaderComponent } from './components/header/header.component';
-import { AdminViewPropertyComponent } from './admin/view-property/view-property.component';
-import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
-import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
 import { UpdatePropertyComponent } from './seller/update-property/update-property.component';
 import { WishlistComponent } from './buyer/wishlist/wishlist.component';
 // import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
@@ -25,9 +22,6 @@ export const routes: Routes = [
   { path: 'seller', component: SellerLandingComponent },
   { path: 'admin', component: AdminLandingComponent   },
   { path: 'components/header', component: HeaderComponent },
-  { path: 'admin/view-property', component: AdminViewPropertyComponent },
-  { path: 'view-property-owner', component: ViewPropertyOwnerComponent },
-  { path: 'view-property-region', component: ViewPropertyRegionComponent },
   { path: 'update-property/:id', component: UpdatePropertyComponent },
   { path: 'buyer/wishlist', component: WishlistComponent },
   
