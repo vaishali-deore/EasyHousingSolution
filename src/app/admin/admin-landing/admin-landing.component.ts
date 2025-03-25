@@ -20,6 +20,20 @@ export class AdminLandingComponent implements OnInit {
   searchOwner: string = '';
   loading: boolean = false;
 
+
+  imagePaths = [
+    'img_1.jpg',
+    'img_2.jpg',
+    'img_3.jpg',
+    'img_4.jpg',
+    'img_5.jpg',
+    'img_6.jpg',
+    'img_7.jpg',
+    'img_8.jpg',
+    'img_9.jpg',
+    'img_10.jpg'
+  ];
+
   constructor(private adminService: AdminService) {}
 
   ngOnInit() {
@@ -31,7 +45,18 @@ export class AdminLandingComponent implements OnInit {
     this.loading = true;
     this.adminService.searchProperties(this.searchRegion, this.searchOwner).subscribe(
       (data: any) => {
-        this.properties = data;
+
+
+        // this.properties = data;
+
+        this.properties = data.map((property:any) => ({
+          ...property,
+          imageUrl: this.imagePaths[Math.floor(Math.random() * this.imagePaths.length)]
+        }));
+
+
+
+
         this.loading = false;
       },
       (error) => {

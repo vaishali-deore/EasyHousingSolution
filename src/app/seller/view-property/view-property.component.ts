@@ -9,13 +9,26 @@ import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
 @Component({
   selector: 'app-view-property',
   standalone: true,
-    imports: [CommonModule,LoaderComponent],  // ✅ Import FormsModule here
+  imports: [CommonModule, LoaderComponent], // ✅ Import FormsModule here
   templateUrl: './view-property.component.html',
-  styleUrls: ['./view-property.component.css']
+  styleUrls: ['./view-property.component.css'],
 })
 export class ViewPropertyComponent implements OnInit {
   properties: Property[] = [];
   loading = false;
+
+  imagePaths = [
+    'img_1.jpg',
+    'img_2.jpg',
+    'img_3.jpg',
+    'img_4.jpg',
+    'img_5.jpg',
+    'img_6.jpg',
+    'img_7.jpg',
+    'img_8.jpg',
+    'img_9.jpg',
+    'img_10.jpg'
+];
 
 
   constructor(private sellerService: SellerService, private router: Router) {}
@@ -26,33 +39,29 @@ export class ViewPropertyComponent implements OnInit {
 
   // 🔹 Fetch Properties from API
   loadProperties() {
-  this.loading = true;
+    this.loading = true;
     this.sellerService.getAllProperties().subscribe(
       (response) => {
-        console.log('res::get all proeprty ',response)
-        this.properties = response;
+
+        // this.properties = response;
+
+        this.properties = response.map(property => ({
+          ...property,
+          imageUrl: this.imagePaths[Math.floor(Math.random() * this.imagePaths.length)]
+        }));
+
         this.loading = false;
 
-        // Fetch image URLs for each property
-        // this.properties.forEach((property) => {
-        //   this.getImageByPropertyId(property.propertyId).subscribe((imageUrl) => {
-        //     property.imageUrl = imageUrl; // Store image URL in the property object
-        //   });
-        //   });
-          console.log("get all proeprty res",this.properties);
-
+        console.log('get all proeprty res', this.properties);
       },
       (error) => {
         console.error('Error fetching properties:', error);
         alert('Failed to fetch properties.');
         this.loading = false;
-
       }
     );
   }
 
-
-  
   // 🔹 Navigate to Edit Property Page
   editProperty(id: number) {
     this.router.navigate([`/update-property/${id}`]);
@@ -68,7 +77,9 @@ export class ViewPropertyComponent implements OnInit {
     if (confirm('Are you sure you want to delete this property?')) {
       this.sellerService.deleteProperty(id).subscribe(
         () => {
-          this.properties = this.properties.filter(property => property.propertyId !== id);
+          this.properties = this.properties.filter(
+            (property) => property.propertyId !== id
+          );
           alert('Property deleted successfully.');
         },
         (error) => {
@@ -78,20 +89,22 @@ export class ViewPropertyComponent implements OnInit {
       );
     }
   }
-  
+
   getImageByPropertyId(propertyId: number): Observable<string> {
     return this.sellerService.getImageByPropertyId(propertyId).pipe(
-      tap(response => console.log("API Response:", response)), // Log API response
-      map(response => {
+      tap((response) => console.log('API Response:', response)), // Log API response
+      map((response) => {
         const imageUrl = `data:image/jpeg;base64,${response}`; // Treat response as a Base64 string
-        console.log("Converted Image URL:", imageUrl); // Log converted URL
+        console.log('Converted Image URL:', imageUrl); // Log converted URL
         return imageUrl;
       }),
       catchError((error) => {
-        console.error(`Error fetching image for property ${propertyId}:`, error);
+        console.error(
+          `Error fetching image for property ${propertyId}:`,
+          error
+        );
         return of('property1.jpg'); // Fallback to default image
       })
     );
   }
-  
 }

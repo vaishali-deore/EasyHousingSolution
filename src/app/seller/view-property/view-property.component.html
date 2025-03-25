@@ -1,47 +1,61 @@
 <div class="view-property-container">
-    <h2>View Properties</h2>
-    <button class="add-property-btn" (click)="navigateToAddProperty()">➕ Add Property</button>
+  <h2>View Properties</h2>
+  <button class="add-property-btn" (click)="navigateToAddProperty()">
+    ➕ Add Property
+  </button>
 
-    <app-loader [loading]="loading"></app-loader>
+  <app-loader [loading]="loading"></app-loader>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Images</th>
-                <th>Property Name</th>
-                <th>Property Type</th>
-                <th>Property Option</th>
-                <th>Description</th>
-                <th>Address</th>
-                <th>Price</th>
-                <th>Initial Deposit</th>
-                <th>Landmark</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let property of properties">
-                <td>{{ property.propertyId }}</td>
-                <td>
-                    <img [src]="getImageByPropertyId(property.propertyId) | async" 
-                         alt="Property Image" class="property-img">
-                </td>
-            
-                
-                <td>{{ property.propertyName }}</td>
-                <td>{{ property.propertyType }}</td>
-                <td>{{ property.propertyOption }}</td>
-                <td>{{ property.description }}</td>
-                <td>{{ property.address }}</td>
-                <td>{{ property.priceRange }}</td>
-                <td>{{ property.initialDeposit || 'N/A' }}</td>
-                <td>{{ property.landmark }}</td>
-                <td>
-                    <button class="edit-btn" (click)="editProperty(property.propertyId)">Edit</button>
-                    <button class="delete-btn" (click)="deleteProperty(property.propertyId)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Images</th>
+        <th>Property Name</th>
+        <th>Property Type</th>
+        <th>Property Option</th>
+        <th>Description</th>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Initial Deposit</th>
+        <th>Landmark</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties">
+        <td>{{ property.propertyId }}</td>
+        <td>
+          <!-- <img [src]="getImageByPropertyId(property.propertyId) | async" 
+                         alt="Property Image" class="property-img"> -->
+
+          <img
+            [src]="property.imageUrl ? property.imageUrl : 's4.jpg'"
+            alt="{{ property.propertyName }}"
+            class="property-img"
+          />
+        </td>
+
+        <td>{{ property.propertyName }}</td>
+        <td>{{ property.propertyType }}</td>
+        <td>{{ property.propertyOption }}</td>
+        <td>{{ property.description }}</td>
+        <td>{{ property.address }}</td>
+        <td>{{ property.priceRange }}</td>
+        <td>{{ property.initialDeposit || "N/A" }}</td>
+        <td>{{ property.landmark }}</td>
+        <td>
+          <button class="edit-btn" (click)="editProperty(property.propertyId)">
+            Edit
+          </button>
+          <button
+            class="delete-btn"
+            (click)="deleteProperty(property.propertyId)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

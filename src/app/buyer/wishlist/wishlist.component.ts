@@ -18,6 +18,18 @@ export class WishlistComponent implements OnInit {
   wishlist: any[] = [];
   loading = false;
 
+  imagePaths = [
+    'img_1.jpg',
+    'img_2.jpg',
+    'img_3.jpg',
+    'img_4.jpg',
+    'img_5.jpg',
+    'img_6.jpg',
+    'img_7.jpg',
+    'img_8.jpg',
+    'img_9.jpg',
+    'img_10.jpg'
+];
 
   constructor(private wishlistService: BuyerService) {}
 
@@ -29,7 +41,19 @@ export class WishlistComponent implements OnInit {
     this.loading = true;
     this.wishlistService.getWishlist(this.buyerId).subscribe(
       (data) => {
-        this.wishlist = data;
+
+
+        //uncommet if any issue to add image to wishlist
+        // this.wishlist = data;
+
+
+        // comment if any issue to add image to wishlist
+        this.wishlist = data.map(property => ({
+          ...property,
+          imageUrl: this.imagePaths[Math.floor(Math.random() * this.imagePaths.length)]
+        }));
+
+
         this.loading = false;
       },
       (error) => {
