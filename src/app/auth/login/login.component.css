@@ -97,3 +97,17 @@
     }
 }
 
+/* Red border for invalid input fields */
+.error-border {
+    border: 1px solid red !important;
+    background: #ffe6e6;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+    display: block;
+}

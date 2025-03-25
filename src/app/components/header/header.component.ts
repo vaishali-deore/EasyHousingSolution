@@ -65,9 +65,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['seller/view-property']);
   }
 
-  manageUsers() {
-    alert('work in progress..!!');
-  }
+  // manageUsers() {
+  //   alert('work in progress..!!');
+  // }
 
   viewAdminProperties() {
     this.router.navigate(['admin']);

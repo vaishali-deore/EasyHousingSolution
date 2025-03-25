@@ -2,13 +2,21 @@
 
 <div class="auth-container">
     <h2>Login</h2>
-    <form (submit)="login()">
+    <form (submit)="login($event)">
+      
+      <!-- Email Field -->
       <label>Email</label>
-      <input type="email" [(ngModel)]="userName" name="userName" placeholder="Enter your user name" required>
-      
+      <input type="email" [(ngModel)]="userName" name="userName" placeholder="Enter your user name"
+        [ngClass]="{'error-border': userNameError}" required>
+      <div *ngIf="userNameError" class="error-message">{{ userNameError }}</div>
+
+      <!-- Password Field -->
       <label>Password</label>
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Enter your password" required>
-      
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Enter your password"
+        [ngClass]="{'error-border': passwordError}" required>
+      <div *ngIf="passwordError" class="error-message">{{ passwordError }}</div>
+
+      <!-- Submit Button -->
       <button type="submit" class="primary-btn">Login</button>
     </form>
 

@@ -16,15 +16,11 @@ export class AuthService {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json'
           });
-          
-        console.log("Auth Paylaod in auth service::",signupPayload,headers,this.signupUrl)
-        return this.http.post(this.signupUrl, signupPayload, { headers });
+           return this.http.post(this.signupUrl, signupPayload, { headers });
     }
 
 
     login(userName: string, password: string): Observable<any> {
-        console.log(`${this.loginUrl}?Username=${userName}&Password=${password}`)
-        console.log('userName',userName," ","password",password)
         return this.http.post(`${this.loginUrl}?Username=${userName}&Password=${password}`,[]);
       }
   }

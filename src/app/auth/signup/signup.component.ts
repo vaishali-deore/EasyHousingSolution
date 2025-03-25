@@ -10,10 +10,10 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,  // ✅ This makes it a standalone component
-  imports: [FormsModule,CommonModule,HeaderComponent,FooterComponent],  // ✅ Import FormsModule here
+  standalone: true, // ✅ This makes it a standalone component
+  imports: [FormsModule, CommonModule, HeaderComponent, FooterComponent], // ✅ Import FormsModule here
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
   userName: string = '';
@@ -29,15 +29,12 @@ export class SignupComponent {
   cityId: number | null = null;
   message: string = '';
 
+  isSubmitted: boolean = false;
 
-  isSubmitted: boolean = false; // Track if form is submitted
-
-
-  // Sample State & City Data (Ideally, fetch this from an API)
   states = [
     { id: 1, name: 'Maharashtra' },
     { id: 2, name: 'Karnataka' },
-    { id: 3, name: 'Gujarat' }
+    { id: 3, name: 'Gujarat' },
   ];
 
   cities = [
@@ -46,10 +43,10 @@ export class SignupComponent {
     { id: 3, name: 'Bangalore', stateId: 2 },
     { id: 4, name: 'Mysore', stateId: 2 },
     { id: 5, name: 'Ahmedabad', stateId: 3 },
-    { id: 6, name: 'Surat', stateId: 3 }
+    { id: 6, name: 'Surat', stateId: 3 },
   ];
 
-  filteredCities = this.cities; // Cities that change based on selected state
+  filteredCities = this.cities;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -57,33 +54,35 @@ export class SignupComponent {
     this.router.navigate(['/login']);
   }
 
-  
   onStateChange(event: Event) {
     const selectedStateId = (event.target as HTMLSelectElement).value;
     this.stateId = Number(selectedStateId); // Convert to number
-    this.filteredCities = this.cities.filter(city => city.stateId === this.stateId);
+    this.filteredCities = this.cities.filter(
+      (city) => city.stateId === this.stateId
+    );
     this.cityId = null; // Reset city selection
   }
-  
-  signup() {
 
+  signup() {
     this.isSubmitted = true; // Mark form as submitted to show red borders
 
-    if (!this.userName.trim() || !this.password.trim() || !this.firstName.trim() || !this.lastName.trim() ||
-        !this.dateofBirth || !this.phoneNo.trim() || !this.emailId.trim() || !this.address.trim() ||
-        !this.stateId || !this.cityId || !this.userType) {
-      
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Please fill in all required fields!',
-        confirmButtonColor: '#218838'
-      });
-
+    if (
+      !this.userName.trim() ||
+      !this.password.trim() ||
+      !this.firstName.trim() ||
+      !this.lastName.trim() ||
+      !this.dateofBirth ||
+      !this.phoneNo.trim() ||
+      !this.emailId.trim() ||
+      !this.address.trim() ||
+      !this.stateId ||
+      !this.cityId ||
+      !this.userType
+    ) {
       return;
     }
 
-
+    this.isSubmitted = false;
     const signupPayload = {
       userName: this.userName,
       password: this.password,
@@ -94,8 +93,8 @@ export class SignupComponent {
       phoneNo: this.phoneNo,
       address: this.address,
       emailId: this.emailId,
-      stateId: 2,
-      cityId: 2
+      stateId: Number(this.stateId),
+      cityId: Number(this.cityId),
     };
 
     console.log('Signup Payload:', signupPayload);
@@ -109,7 +108,8 @@ export class SignupComponent {
       },
       (error) => {
         console.error('Signup Failed', error);
-        this.message = 'Signup failed: ' + (error.error?.error || 'Unknown error');
+        this.message =
+          'Signup failed: ' + (error.error?.error || 'Unknown error');
       }
     );
   }

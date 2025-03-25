@@ -122,3 +122,10 @@
     box-shadow: 0 0 5px rgba(33, 136, 56, 0.5);
   }
   
+  .error-message {
+    color: red;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 10px;
+    display: block;
+}

@@ -12,7 +12,7 @@ import { Property } from '../../landing/landing.component';
   standalone: true,
   imports: [HeaderComponent, FooterComponent, FormsModule, CommonModule,LoaderComponent],
   templateUrl: './admin-landing.component.html',
-  styleUrls: ['./admin-landing.component.css'] // ✅ Fixed `styleUrls`
+  styleUrls: ['./admin-landing.component.css'] 
 })
 export class AdminLandingComponent implements OnInit {
   properties: any[] = [];
@@ -35,42 +35,7 @@ export class AdminLandingComponent implements OnInit {
         this.loading = false;
       },
       (error) => {
-            // 🌟 Default Property Data when backend fails
-            // const defaultData: any[] = [
-            //   {
-            //     propertyId: 1,
-            //     propertyName: 'Luxury Apartment',
-            //     region:'deola',
-            //     propertyType: 'apartment',
-            //     propertyOption: 'sell',
-            //     description: 'A beautiful apartment in the city center.',
-            //     address: '123 Main Street',
-            //     priceRange: 250000,
-            //     initialDeposit: 20000,
-            //     landmark: 'Near Central Park',
-            //     isActive: true,
-            //     sellerId: 101,
-            //     imageUrl: 's4.jpg',
-            //   },
-            //   {
-            //     propertyId: 2,
-            //     propertyName: 'Cozy Villa',
-            //     propertyType: 'villa',
-            //     propertyOption: 'rent',
-            //     description: 'Spacious villa with a private garden.',
-            //     address: '456 Green Avenue',
-            //     priceRange: 1500,
-            //     initialDeposit: 300,
-            //     landmark: 'Near Sunset Beach',
-            //     isActive: false,
-            //     sellerId: 102,
-            //     imageUrl: 's4.jpg',
-            //   }
-            // ];
-      
-            // // Assign default data if API fails
-            // this.properties = defaultData;
-          console.error('Error fetching properties:', error);
+                     console.error('Error fetching properties:', error);
             this.loading = false;
       
       }
@@ -88,7 +53,6 @@ export class AdminLandingComponent implements OnInit {
       (response) => {
         console.log('Property activated:', response.message);
         alert(response.message || 'Property successfully activated!');
-        
         // 🔄 Refresh property list after activation
         this.searchProperties();
       },

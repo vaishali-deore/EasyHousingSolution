@@ -5,13 +5,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SellerLandingComponent } from './seller/seller-landing/seller-landing.component'
 import { AddPropertyComponent } from './seller/add-property/add-property.component';
-import { ViewPropertyComponent } from './seller/view-property/view-property.component';
 import { AdminLandingComponent } from './admin/admin-landing/admin-landing.component';
 import { HeaderComponent } from './components/header/header.component';
 import { UpdatePropertyComponent } from './seller/update-property/update-property.component';
 import { WishlistComponent } from './buyer/wishlist/wishlist.component';
-// import { ViewPropertyOwnerComponent } from './admin/view-property-owner/view-property-owner.component';
-// import { ViewPropertyRegionComponent } from './admin/view-property-region/view-property-region.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },

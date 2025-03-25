@@ -35,43 +35,6 @@ export class WishlistComponent implements OnInit {
       (error) => {
         console.error('Error loading wishlist:', error);
         this.loading = false;
-        
-        // Set hardcoded wishlist data when an error occurs
-        this.wishlist = [
-          {
-            propertyId: 1,
-            propertyName: 'Luxury Apartment',
-            propertyType: 'Apartment',
-            propertyOption: 'Rent',
-            address: 'Downtown, NY',
-            priceRange: '$2000/month',
-            initialDeposit: '$4000',
-            landmark: 'Near Central Park',
-            imageUrl: 'property1.jpg'
-          },
-          {
-            propertyId: 2,
-            propertyName: 'Cozy Cottage',
-            propertyType: 'House',
-            propertyOption: 'Buy',
-            address: 'Countryside, TX',
-            priceRange: '$150,000',
-            initialDeposit: '$30,000',
-            landmark: 'Near Green Hills',
-            imageUrl: 'property2.jpg'
-          },
-          {
-            propertyId: 3,
-            propertyName: 'Modern Villa',
-            propertyType: 'Villa',
-            propertyOption: 'Buy',
-            address: 'Beverly Hills, CA',
-            priceRange: '$2,000,000',
-            initialDeposit: '$500,000',
-            landmark: 'Near Hollywood Sign',
-            imageUrl: 'property3.jpg'
-          }
-        ];
       }
     );
   }

@@ -9,48 +9,64 @@
           <label>Username</label>
           <input type="text" [(ngModel)]="userName" name="userName" placeholder="Username" 
             [ngClass]="{'error-border': isSubmitted && !userName.trim()}" required>
+            <div *ngIf="isSubmitted && !userName.trim()" class="error-message">{{ 'Username is required!' }}</div>
+
         </div>
 
         <div>
           <label>Password</label>
           <input type="password" [(ngModel)]="password" name="password" placeholder="Password" 
             [ngClass]="{'error-border': isSubmitted && !password.trim()}" required>
+            <div *ngIf="isSubmitted && !password.trim()" class="error-message">{{ 'Password is required!' }}</div>
+
         </div>
 
         <div>
           <label>First Name</label>
           <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" 
             [ngClass]="{'error-border': isSubmitted && !firstName.trim()}" required>
+            <div *ngIf="isSubmitted && !firstName.trim()" class="error-message">{{ 'First Name is required!' }}</div>
+
         </div>
 
         <div>
           <label>Last Name</label>
           <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" 
             [ngClass]="{'error-border': isSubmitted && !lastName.trim()}" required>
+            <div *ngIf="isSubmitted && !lastName.trim()" class="error-message">{{ 'Last Name is required!' }}</div>
+
         </div>
 
         <div class="full-width">
           <label>Date of Birth</label>
           <input type="date" [(ngModel)]="dateofBirth" name="dateofBirth" 
             [ngClass]="{'error-border': isSubmitted && !dateofBirth}" required>
+            <div *ngIf="isSubmitted && !dateofBirth.trim()" class="error-message">{{ 'Date is required!' }}</div>
+
         </div>
 
         <div>
           <label>Phone Number</label>
           <input type="tel" [(ngModel)]="phoneNo" name="phoneNo" placeholder="Phone No" 
             [ngClass]="{'error-border': isSubmitted && !phoneNo.trim()}" required>
+            <div *ngIf="isSubmitted && !phoneNo.trim()" class="error-message">{{ 'Phone Number is required!' }}</div>
+
         </div>
 
         <div>
           <label>Email</label>
           <input type="email" [(ngModel)]="emailId" name="emailId" placeholder="Email" 
             [ngClass]="{'error-border': isSubmitted && !emailId.trim()}" required>
+            <div *ngIf="isSubmitted && !emailId.trim()" class="error-message">{{ 'Email is required!' }}</div>
+
         </div>
 
         <div class="full-width">
           <label>Address</label>
           <input type="text" [(ngModel)]="address" name="address" placeholder="Address" 
             [ngClass]="{'error-border': isSubmitted && !address.trim()}" required>
+            <div *ngIf="isSubmitted && !address.trim()" class="error-message">{{ 'Address is required!' }}</div>
+
         </div>
 
         <div>
@@ -59,6 +75,8 @@
             [ngClass]="{'error-border': isSubmitted && !stateId}" required>
             <option *ngFor="let state of states" [value]="state.id">{{ state.name }}</option>
           </select>
+          <div *ngIf="isSubmitted && !stateId" class="error-message">{{ 'State is required!' }}</div>
+
         </div>
 
         <div>
@@ -67,6 +85,8 @@
             [ngClass]="{'error-border': isSubmitted && !cityId}" required>
             <option *ngFor="let city of filteredCities" [value]="city.id">{{ city.name }}</option>
           </select>
+          <div *ngIf="isSubmitted && !cityId" class="error-message">{{ 'City is required!' }}</div>
+
         </div>
 
         <div class="full-width">
@@ -76,6 +96,8 @@
             <option value="buyer">Buyer</option>
             <option value="seller">Seller</option>
           </select>
+          <div *ngIf="isSubmitted && !userType" class="error-message">{{ 'UserType is required!' }}</div>
+
         </div>
       </div>
 

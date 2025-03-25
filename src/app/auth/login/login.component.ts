@@ -4,21 +4,23 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { AuthService } from '../../services/auth.service';
-// import { AuthService } from '../services/auth.service';
-import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,HeaderComponent,FooterComponent],
+  imports: [FormsModule,HeaderComponent,FooterComponent,CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent { 
-  userName: string = '';  // ✅ Used `username` instead of `email`
+  userName: string = '';  
   password: string = '';
   userType: string = '';
+
+  userNameError: string = '';  
+  passwordError: string = ''; 
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -26,28 +28,23 @@ export class LoginComponent {
     this.router.navigate(['/signup']);
   }
 
-  login() {
-     
-    let errorMessage = '';
+  login(event: Event) {
+    event.preventDefault(); 
 
-    if (!this.userName.trim() && !this.password.trim()) {
-      errorMessage = 'Username and Password are required!';
-    } else if (!this.userName.trim()) {
-      errorMessage = 'Username is required!';
-    } else if (!this.password.trim()) {
-      errorMessage = 'Password is required!';
+    this.userNameError = '';  
+    this.passwordError = '';
+
+    if (!this.userName.trim()) {
+      this.userNameError = 'Username is required!';
     }
-  
-    if (errorMessage) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: errorMessage,
-        confirmButtonColor: '#218838'
-      });
+    if (!this.password.trim()) {
+      this.passwordError = 'Password is required!';
+    }
+
+    // Stop login if errors exist
+    if (this.userNameError || this.passwordError) {
       return;
     }
-  
 
     this.authService.login(this.userName, this.password).subscribe(
       (response: any) => {
